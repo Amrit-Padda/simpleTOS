@@ -11,7 +11,7 @@ nlu = NaturalLanguageUnderstandingV1(version='2019-01-25', authenticator=authent
 
 def get_concepts(text):
     concepts = nlu.analyze(text=text, features=Features(concepts = ConceptsOptions())).get_result()
-    return concepts.json()
+    return concepts
 
 def parse_concepts(text):
     concepts = get_concepts(text)
