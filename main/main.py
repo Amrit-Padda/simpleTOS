@@ -1,5 +1,10 @@
 import sys
 import os
+import tkinter #pip install tkinter
+from tkinter import filedialog
+
+root = tkinter.Tk()
+root.withdraw()
 
 #Import our request handlers
 sys.path.append(os.getcwd() + "/simpleTOS/requestHandlers/")
@@ -14,7 +19,5 @@ parse_concepts("text") -- Replace text with the piece of text that you want to g
 Summary:W
 generate_summary(file_name, n) -- Generates summary of the given file and returns the top n lines(min: 1)
 """
-
-adobe_TOS = "../TOS-Examples/Adobe-Legal-Terms.txt"
-
-# generate_summary(adobe_TOS, 2)
+os.chdir(os.getcwd() + "/simpleTOS/TOS-Examples")
+generate_summary("Dummy.txt", 1)
