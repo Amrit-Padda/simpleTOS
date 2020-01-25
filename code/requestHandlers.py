@@ -23,14 +23,14 @@ def parse_concepts(text):
         parsedInfo[counter] = concept['text']
         counter = counter + 1
     return parsedInfo
-    
+
 """
 Max 1000 Chars
 """
 def get_summary(text):
-    url = 'https://api.smmry.com/
-    data={'SM_API_KEY':smmryAPI, 'sm_api_input':text}
-    
+    url = 'https://api.smmry.com/&SM_API_KEY' + smmryAPI
+    data={'sm_input':text}
+
     summaryResponse = requests.post(url, data, timeout=20, allow_redirects=True)
     print(summaryResponse.json())
 
