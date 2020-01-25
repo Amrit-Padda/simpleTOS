@@ -59,7 +59,7 @@ def build_similarity_matrix(sentences, stop_words):
     return similarity_matrix
 
 
-def generate_summary(file_name, top_n=5):
+def generate_summary(file_name, top_n=1):
     summarize_text = []
 
     # Step 1 - Read text anc split it
