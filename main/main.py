@@ -9,8 +9,8 @@ root.withdraw()
 #Import our request handlers
 sys.path.append(os.getcwd() + "/requestHandlers/")
 
-from ibmRequestHandler import *
-from summarizationRequestHandler import *
+import ibmRequestHandler as ibm
+import summarizationRequestHandler as summarization
 """
 Important functions:
 IBM:
@@ -21,4 +21,4 @@ generate_summary(file_name, n) -- Generates summary of the given file and return
 """
 
 os.chdir(os.getcwd() + "/TOS-Examples")
-generate_summary("Dummy.txt", 1)
+summarization.generate_summary("Dummy.txt", 1)
