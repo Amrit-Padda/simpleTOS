@@ -9,10 +9,9 @@ stop_words = ["ourselves", "hers", "between", "yourself", "but", "again", "there
 
 def read_article(file_name):
     file = open(file_name, mode="r")
-    print("In read article")
     filedata = file.readlines()
-    print("File Data:" + str(filedata))
     article = filedata[0].split(". ")
+    print(article)
     sentences = []
 
     for sentence in article:
