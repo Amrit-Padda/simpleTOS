@@ -5,7 +5,7 @@ def scrape_data_CGI(url):
     CGI_URL = url
     CGI_HTML = requests.get(CGI_URL).text
     CGI_SOUP = BeautifulSoup(CGI_HTML, 'html.parser')
-    CGI_TEXT = CGI_SOUP.findAll("p", {"class": "align_left"}, text=True)
+    CGI_TEXT = CGI_SOUP.findAll("p", {"class": "align_left"})
     paragraphs = []
     for x in CGI_TEXT:
         paragraphs.append(str(x))
