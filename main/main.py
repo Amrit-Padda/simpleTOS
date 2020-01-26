@@ -20,13 +20,12 @@ st_tos_url = 'https://www.shutterstock.com/license'
 os.chdir(os.getcwd() + "/TOS-Examples")
 
 conceptsSummarized = dict()
-#paragraphs = scrape_data_SHUTTERSTOCK(st_tos_url)# Would return an array of all web-scraped paragraphs
+#paragraphs = scrape_data_SHUTTERSTOCK(st_tou_url)# Would return an array of all web-scraped paragraphs
 paragraphs = scrape_data_CGI(cgi_url)
 # -4 is a hardcoded value configured for CGI's ToS
-for i in range(len(paragraphs)-4):
+for i in range(len(paragraphs) - 4):
     clean_paragraph = re.sub("\<(.*?)\>", "", paragraphs[i])
     clean_paragraph = re.sub(r'[^\x00-\x7F]+',' " ', clean_paragraph)
-
     # ignore one word lines
     if clean_paragraph.find(".") == -1:
         continue

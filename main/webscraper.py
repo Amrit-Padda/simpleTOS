@@ -10,7 +10,7 @@ def scrape_data_CGI(url):
     for x in CGI_TEXT:
         paragraphs.append(str(x))
     return paragraphs
-
+    
 def scrape_data_SHUTTERSTOCK(url):
     ST_URL = url
     ST_HTML = requests.get(ST_URL, headers={"User-Agent": "XY"}).text
