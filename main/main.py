@@ -1,6 +1,6 @@
 import sys
 import os
-
+import re
 from ibmRequestHandler import *
 from summarizationRequestHandler import *
 from webscraper import *
@@ -18,7 +18,9 @@ os.chdir(os.getcwd() + "/TOS-Examples")
 
 conceptsSummarized = dict()
 paragraphs = scrape_data(url)# Would return an array of all web-scraped paragraphs
-for paragraph in paragraphs:
-    conceptsSummarized.update({parse_concepts(paragraph)[0] : generate_summary(paragraph, 2)}) #Add the concept and a summary of it to the list
+for i in range(len(paragraphs)):
+    replaced = re.sub("\<(.*?)\>", "", paragraphs[i])
+    generate_summary("dummy.txt", 1)
+    #conceptsSummarized.update({parse_concepts(replaced)[0] : generate_summary(f2, 2)}) #Add the concept and a summary of it to the list
 
 print(conceptsSummarized)

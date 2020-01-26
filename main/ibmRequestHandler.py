@@ -12,7 +12,7 @@ def get_concepts(text):
     concepts = nlu.analyze(text=text, features=Features(concepts = ConceptsOptions(limit=1))).get_result()
     return concepts['concepts']
 
-def parse_concepts(file_name):
+def parse_concepts(text):
     concepts = get_concepts(text)
     parsedInfo = []
     for i in range(len(concepts)):
