@@ -1,16 +1,8 @@
 import sys
 import os
-import tkinter #pip install tkinter
-from tkinter import filedialog
 
-root = tkinter.Tk()
-root.withdraw()
-
-#Import our request handlers
-sys.path.append(os.getcwd() + "/requestHandlers/")
-
-import ibmRequestHandler as ibm
-import summarizationRequestHandler as summarization
+from ibmRequestHandler import *
+from summarizationRequestHandler import *
 """
 Important functions:
 IBM:
@@ -21,4 +13,5 @@ generate_summary(file_name, n) -- Generates summary of the given file and return
 """
 
 os.chdir(os.getcwd() + "/TOS-Examples")
-summarization.generate_summary("Dummy.txt", 1)
+conceptList = parse_concepts("Dummy.txt")
+print(conceptList)
