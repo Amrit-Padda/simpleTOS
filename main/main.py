@@ -38,4 +38,4 @@ for i in range(len(paragraphs) - 4):
     else:
         conceptsSummarized.update({concept : summary}) #Add the concept and a summary of it to the list
 
-print(conceptsSummarized)
+to_html(conceptsSummarized)
