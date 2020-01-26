@@ -15,7 +15,7 @@ def scrape_data_SHUTTERSTOCK(url):
     ST_URL = url
     ST_HTML = requests.get(ST_URL, headers={"User-Agent": "XY"}).text
     ST_SOUP = BeautifulSoup(ST_HTML, 'html.parser')
-    ST_TEXT = ST_SOUP.findAll(['ol', 'b'])
+    ST_TEXT = ST_SOUP.findAll("ol")
     paragraphs = []
     for x in ST_TEXT:
         paragraphs.append(str(x))

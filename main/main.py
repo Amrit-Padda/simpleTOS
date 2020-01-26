@@ -19,11 +19,14 @@ st_url = 'https://www.shutterstock.com/terms'
 os.chdir(os.getcwd() + "/TOS-Examples")
 
 conceptsSummarized = dict()
-#paragraphs = scrape_data_CGI(cgi_url)# Would return an array of all web-scraped paragraphs
-paragraphs = scrape_data_CGI(cgi_url)
+paragraphs = scrape_data_SHUTTERSTOCK(st_url)# Would return an array of all web-scraped paragraphs
+#paragraphs = scrape_data_CGI(cgi_url)
 # -4 is a hardcoded value configured for CGI's ToS
-for i in range(len(paragraphs) - 4):
+for i in range(len(paragraphs) ):
     clean_paragraph = re.sub("\<(.*?)\>", "", paragraphs[i])
+
+    print("------------------")
+    print(clean_paragraph)
 
     # ignore one word lines
     if clean_paragraph.find(".") == -1:
@@ -35,7 +38,10 @@ for i in range(len(paragraphs) - 4):
 
     # Avoids overriding concept data when appending new info to it
     if concept in conceptsSummarized:
-        conceptsSummarized.update({concept : conceptsSummarized[concept] + ". " + (summary)})
+        if conceptsSummarized[concept].endswith('.'): #If the last character is a period, then just add space after
+            conceptsSummarized.update({concept : conceptsSummarized[concept] + "<br>" + (summary)})
+        else:
+            conceptsSummarized.update({concept : conceptsSummarized[concept] + ".<br>" + (summary)})
     else:
         conceptsSummarized.update({concept : summary}) #Add the concept and a summary of it to the list
 
