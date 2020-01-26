@@ -13,22 +13,27 @@ parse_concepts("text") -- Replace text with the piece of text that you want to g
 Summary:
 generate_summary(text, n) -- Generates summary of the given text and returns the top n lines(min: 1)
 """
-url = 'https://www.cgi.com/en/legal-restrictions'
+cgi_url = 'https://www.cgi.com/en/legal-restrictions'
+st_url = 'https://www.shutterstock.com/terms'
 
 os.chdir(os.getcwd() + "/TOS-Examples")
 
 conceptsSummarized = dict()
-paragraphs = scrape_data_CGI(url)# Would return an array of all web-scraped paragraphs
-
+#paragraphs = scrape_data_CGI(cgi_url)# Would return an array of all web-scraped paragraphs
+paragraphs = scrape_data_SHUTTERSTOCK(st_url)
 # -4 is a hardcoded value configured for CGI's ToS
-for i in range(len(paragraphs) - 4):
+for i in range(len(paragraphs) ):
     clean_paragraph = re.sub("\<(.*?)\>", "", paragraphs[i])
 
+    print("----------------")
+    print(clean_paragraph)
+"""
     # ignore one word lines
     if clean_paragraph.find(".") == -1:
         continue
     else:
         concept = parse_concepts(clean_paragraph)[0]
+        print("Concept: " + concept)
 
     summary = generate_summary(clean_paragraph, 1)
 
@@ -39,3 +44,4 @@ for i in range(len(paragraphs) - 4):
         conceptsSummarized.update({concept : summary}) #Add the concept and a summary of it to the list
 
 to_html(conceptsSummarized)
+"""
