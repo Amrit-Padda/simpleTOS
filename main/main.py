@@ -4,6 +4,7 @@ import re
 from ibmRequestHandler import *
 from summarizationRequestHandler import *
 from webscraper import *
+from toHTML import *
 """
 Important functions:
 IBM:

@@ -80,4 +80,4 @@ def generate_summary(paragraph, top_n=5):
       summarize_text.append(" ".join(ranked_sentence[i][1]))
 
     # Step 5 - Offcourse, output the summarize texr
-    print("Summarized Text: \n", ". ".join(summarize_text))
+    return ". ".join(summarize_text)
