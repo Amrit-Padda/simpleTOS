@@ -13,7 +13,6 @@ def get_text_from_file(file_name):
     masterLine = ""
     for line in f.readlines():
         masterLine = masterLine + line
-    print("Joined all lines")
     return masterLine
 
 
@@ -23,9 +22,7 @@ def get_concepts(text):
 
 def parse_concepts(file_name):
     text = get_text_from_file(file_name)
-    print("Text: " + text)
     concepts = get_concepts(text)
-    print(concepts)
     parsedInfo = []
     for i in range(len(concepts)):
         parsedInfo.append(concepts[i]['text'])
