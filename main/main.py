@@ -20,7 +20,7 @@ conceptsSummarized = dict()
 paragraphs = scrape_data(url)# Would return an array of all web-scraped paragraphs
 for i in range(len(paragraphs)):
     replaced = re.sub("\<(.*?)\>", "", paragraphs[i])
-    generate_summary("dummy.txt", 1)
+    generate_summary(replaced, 1)
     #conceptsSummarized.update({parse_concepts(replaced)[0] : generate_summary(f2, 2)}) #Add the concept and a summary of it to the list
 
 print(conceptsSummarized)

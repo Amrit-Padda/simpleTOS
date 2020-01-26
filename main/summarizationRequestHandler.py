@@ -7,19 +7,18 @@ import os
  
 stop_words = ["ourselves", "hers", "between", "yourself", "but", "again", "there", "about", "once", "during", "out", "very", "having", "with", "they", "own", "an", "be", "some", "for", "do", "its", "yours", "such", "into", "of", "most", "itself", "other", "off", "is", "s", "am", "or", "who", "as", "from", "him", "each", "the", "themselves", "until", "below", "are", "we", "these", "your", "his", "through", "don", "nor", "me", "were", "her", "more", "himself", "this", "down", "should", "our", "their", "while", "above", "both", "up", "to", "ours", "had", "she", "all", "no", "when", "at", "any", "before", "them", "same", "and", "been", "have", "in", "will", "on", "does", "yourselves", "then", "that", "because", "what", "over", "why", "so", "can", "did", "not", "now", "under", "he", "you", "herself", "has", "just", "where", "too", "only", "myself", "which", "those", "i", "after", "few", "whom", "t", "being", "if", "theirs", "my", "against", "a", "by", "doing", "it", "how", "further", "was", "here", "than"]
 
-def read_article(file_name):
-    file = open(file_name, mode="r")
-    filedata = file.readlines()
-    article = filedata[0].split(". ")
-    print(article)
-    sentences = []
+# split paragraph into sentences
+def read_article(paragraph):
+    sentences = paragraph.split(". ")
+    clean_sentences = []
 
-    for sentence in article:
-        print(sentence)
-        sentences.append(sentence.replace("[^a-zA-Z]", " ").split(" "))
+    # TODO: is this useful anymore? we clean up the paragraph in main already.
+    for sentence in sentences:
+        # print(sentence)
+        clean_sentences.append(sentence.replace("[^a-zA-Z]", " ").split(" "))
     sentences.pop() 
     
-    return sentences
+    return clean_sentences
 
 def sentence_similarity(sent1, sent2, stopwords=None):
     if stopwords is None:
@@ -60,12 +59,12 @@ def build_similarity_matrix(sentences, stop_words):
     return similarity_matrix
 
 
-def generate_summary(file_name, top_n=5):
+def generate_summary(paragraph, top_n=5):
     summarize_text = []
 
     # Step 1 - Read text anc split it
-    sentences =  read_article(file_name)
-    print("Should have read sentences")
+    sentences =  read_article(paragraph)
+
     # Step 2 - Generate Similary Martix across sentences
     sentence_similarity_martix = build_similarity_matrix(sentences, stop_words)
 
@@ -75,10 +74,10 @@ def generate_summary(file_name, top_n=5):
 
     # Step 4 - Sort the rank and pick top sentences
     ranked_sentence = sorted(((scores[i],s) for i,s in enumerate(sentences)), reverse=True)    
-    print("Indexes of top ranked_sentence order are ", ranked_sentence)    
+    # print("Indexes of top ranked_sentence order are ", ranked_sentence)    
 
     for i in range(top_n):
       summarize_text.append(" ".join(ranked_sentence[i][1]))
 
     # Step 5 - Offcourse, output the summarize texr
-    print("Summarize Text: \n", ". ".join(summarize_text))
+    print("Summarized Text: \n", ". ".join(summarize_text))
