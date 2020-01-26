@@ -20,10 +20,22 @@ os.chdir(os.getcwd() + "/TOS-Examples")
 conceptsSummarized = dict()
 paragraphs = scrape_data_CGI(url)# Would return an array of all web-scraped paragraphs
 
-for i in range(len(paragraphs)):
-    replaced = re.sub("\<(.*?)\>", "", paragraphs[i])
-    print("-----------------")
-    print(replaced)
-    #conceptsSummarized.update({parse_concepts(replaced)[0] : generate_summary(f2, 2)}) #Add the concept and a summary of it to the list
+# -4 is a hardcoded value configured for CGI's ToS
+for i in range(len(paragraphs) - 4):
+    clean_paragraph = re.sub("\<(.*?)\>", "", paragraphs[i])
+
+    # ignore one word lines
+    if clean_paragraph.find(".") == -1:
+        continue
+    else:
+        concept = parse_concepts(clean_paragraph)[0]
+
+    summary = generate_summary(clean_paragraph, 1)
+
+    # Avoids overriding concept data when appending new info to it
+    if concept in conceptsSummarized:
+        conceptsSummarized.update({concept : conceptsSummarized[concept] + ". " + (summary)})
+    else:
+        conceptsSummarized.update({concept : summary}) #Add the concept and a summary of it to the list
 
 print(conceptsSummarized)
