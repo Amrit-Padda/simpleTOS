@@ -8,20 +8,11 @@ from ibm_watson.natural_language_understanding_v1 import Features, ConceptsOptio
 authenticator = IAMAuthenticator('_nf9lfcQviYt2nyNlwF1LF_-2q86K8wzdecm-b-Gf_G9')
 nlu = NaturalLanguageUnderstandingV1(version='2019-01-25', authenticator=authenticator)
 
-def get_text_from_file(file_name):
-    f = open(file_name, mode="r")
-    masterLine = ""
-    for line in f.readlines():
-        masterLine = masterLine + line
-    return masterLine
-
-
 def get_concepts(text):
-    concepts = nlu.analyze(text=text, features=Features(concepts = ConceptsOptions())).get_result()
+    concepts = nlu.analyze(text=text, features=Features(concepts = ConceptsOptions(limit=1))).get_result()
     return concepts['concepts']
 
 def parse_concepts(file_name):
-    text = get_text_from_file(file_name)
     concepts = get_concepts(text)
     parsedInfo = []
     for i in range(len(concepts)):
