@@ -18,7 +18,8 @@ url = 'https://www.cgi.com/en/legal-restrictions'
 os.chdir(os.getcwd() + "/TOS-Examples")
 
 conceptsSummarized = dict()
-paragraphs = scrape_data(url)# Would return an array of all web-scraped paragraphs
+paragraphs = scrape_data_SHUTTERSTOCK('https://www.shutterstock.com/terms')# Would return an array of all web-scraped paragraphs
+
 for i in range(len(paragraphs)):
     replaced = re.sub("\<(.*?)\>", "", paragraphs[i])
     generate_summary(replaced, 1)
