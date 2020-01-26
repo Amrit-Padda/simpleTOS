@@ -20,20 +20,16 @@ os.chdir(os.getcwd() + "/TOS-Examples")
 
 conceptsSummarized = dict()
 #paragraphs = scrape_data_CGI(cgi_url)# Would return an array of all web-scraped paragraphs
-paragraphs = scrape_data_SHUTTERSTOCK(st_url)
+paragraphs = scrape_data_CGI(cgi_url)
 # -4 is a hardcoded value configured for CGI's ToS
-for i in range(len(paragraphs) ):
+for i in range(len(paragraphs) - 4):
     clean_paragraph = re.sub("\<(.*?)\>", "", paragraphs[i])
 
-    print("----------------")
-    print(clean_paragraph)
-"""
     # ignore one word lines
     if clean_paragraph.find(".") == -1:
         continue
     else:
         concept = parse_concepts(clean_paragraph)[0]
-        print("Concept: " + concept)
 
     summary = generate_summary(clean_paragraph, 1)
 
@@ -44,4 +40,3 @@ for i in range(len(paragraphs) ):
         conceptsSummarized.update({concept : summary}) #Add the concept and a summary of it to the list
 
 to_html(conceptsSummarized)
-"""
